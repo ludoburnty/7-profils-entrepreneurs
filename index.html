@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Et si vous étiez votre propre angle mort ? - Les 7 profils</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+
+        function SeriesHomepage() {
+            const [revealedQuestions, setRevealedQuestions] = useState({});
+            
+            const toggleQuestion = (typeId) => {
+                setRevealedQuestions(prev => ({
+                    ...prev,
+                    [typeId]: !prev[typeId]
+                }));
+            };
+
+            const types = [
+                {
+                    id: 1,
+                    title: "Type 1",
+                    subtitle: "« Tout est sous contrôle »",
+                    question: "Ai-je vraiment le contrôle... ou juste l'illusion du contrôle ?",
+                    color: "from-blue-600 to-blue-800",
+                    icon: "🎯",
+                    traits: ["Minimise les menaces", "Refuse les signaux d'alerte", "Surconfiance"],
+                    consequence: "Équipe silencieuse, crises ignorées"
+                },
+                {
+                    id: 2,
+                    title: "Type 2",
+                    subtitle: "« Je persiste et signe »",
+                    question: "Et si mon expérience passée ne s'appliquait pas à cette situation ?",
+                    color: "from-orange-600 to-orange-800",
+                    icon: "💪",
+                    traits: ["S'appuie sur l'expérience passée", "Confiance en sa méthode éprouvée", "J'ai toujours raison"],
+                    consequence: "Rigidité, incapacité à s'adapter aux nouveaux contextes"
+                },
+                {
+                    id: 3,
+                    title: "Type 3",
+                    subtitle: "« C'est la faute à... »",
+                    question: "Qu'est-ce que JE peux changer dans MA façon de faire ?",
+                    color: "from-red-600 to-red-800",
+                    icon: "👉",
+                    traits: ["Externalise la responsabilité", "Cherche des coupables", "Posture de victime"],
+                    consequence: "Impuissance apprise, aucun levier"
+                },
+                {
+                    id: 4,
+                    title: "Type 4",
+                    subtitle: "« Je fonce dans le mur ! »",
+                    question: "Qu'est-ce que ce mur me cache ?",
+                    color: "from-purple-600 to-purple-800",
+                    icon: "🧱",
+                    traits: ["Reconnaît le problème", "Tétanisé par l'obstacle", "Attraction du mur"],
+                    consequence: "Isolement, tétanisation, attraction du mur"
+                },
+                {
+                    id: 5,
+                    title: "Type 5",
+                    subtitle: "« Que voulez-vous que j'y fasse ?! »",
+                    question: "Qu'est-ce que je peux faire AVEC ce que j'ai déjà ?",
+                    color: "from-teal-600 to-teal-800",
+                    icon: "🤷",
+                    traits: ["Manque de ressources perçu", "Attente des conditions parfaites", "Impuissance apprise"],
+                    consequence: "Paralysie, occasions manquées de solutions créatives"
+                },
+                {
+                    id: 6,
+                    title: "Type 6",
+                    subtitle: "« J'ai tout essayé ! »",
+                    question: "Est-ce que je m'y prends de la bonne façon pour résoudre ce problème ?",
+                    color: "from-green-600 to-green-800",
+                    icon: "😫",
+                    traits: ["Solutions au mauvais problème", "Fatigue et découragement", "N'interroge jamais sa méthode"],
+                    consequence: "Répète les mêmes stratégies sans résultat"
+                }
+            ];
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+                    <div className="relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-transparent"></div>
+                        <div className="max-w-6xl mx-auto px-6 py-20 relative">
+                            <div className="text-center mb-12">
+                                <div className="inline-block mb-6">
+                                    <div className="text-7xl mb-4 animate-pulse">❓</div>
+                                </div>
+                                <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                                    Et si vous étiez<br />votre propre angle mort ?
+                                </h1>
+                                <p className="text-2xl text-gray-300 mb-4">
+                                    Découvrez comment votre façon de voir les problèmes... devient LE problème... chacun à votre façon.
+                                </p>
+                            </div>
+
+                            <div className="bg-slate-800/50 rounded-2xl p-8 mb-8 border border-slate-700">
+                                <div className="rounded-lg overflow-hidden">
+                                    <img 
+                                        src="https://i.imgur.com/A4Jt3nx.png" 
+                                        alt="Les 7 profils d'entrepreneurs"
+                                        className="w-full h-auto"
+                                    />
+                                </div>
+                                <p className="text-center text-gray-400 mt-4 text-sm">
+                                    6 profils d'entrepreneurs... et un 7ème dont vous découvrirez l'identité
+                                </p>
+                            </div>
+
+                            <div className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-xl p-8 mb-12 border border-slate-600">
+                                <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                                    👁️ Le concept
+                                </h2>
+                                <p className="text-gray-300 leading-relaxed mb-4">
+                                    Face à un problème, votre première réaction en dit plus sur vous que sur le problème lui-même. 
+                                    Certains entrepreneurs nient qu'il existe. D'autres se réfugient dans l'expérience passée. 
+                                    D'autres encore accusent le contexte, foncent dans le mur, manquent de ressources, 
+                                    ou multiplient les solutions sans changer de méthode.
+                                </p>
+                                <p className="text-gray-300 leading-relaxed">
+                                    <strong className="text-blue-400">Le point commun ?</strong> Chacun évite LA question 
+                                    qui révélerait son angle mort. Cette série vous invite à découvrir la vôtre.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="max-w-6xl mx-auto px-6 py-12">
+                        <h2 className="text-3xl font-bold mb-12 text-center">
+                            Les <span className="text-6xl font-extrabold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">7</span> profils d'entrepreneur
+                        </h2>
+                        
+                        <div className="grid md:grid-cols-2 gap-8 mb-16">
+                            {types.map((type) => (
+                                <div key={type.id} className="group relative">
+                                    <div className={`bg-gradient-to-br ${type.color} p-6 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl`}>
+                                        <div className="flex items-start justify-between mb-4">
+                                            <div>
+                                                <div className="text-4xl mb-2">{type.icon}</div>
+                                                <h3 className="text-2xl font-bold">{type.title}</h3>
+                                                <p className="text-lg opacity-90 italic">{type.subtitle}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <p className="text-sm opacity-75 mb-2">Comportements typiques :</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {type.traits.map((trait, idx) => (
+                                                    <span key={idx} className="text-xs bg-white/20 px-3 py-1 rounded-full">
+                                                        {trait}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-black/30 p-4 rounded-lg mb-4">
+                                            <div className="flex items-center justify-between mb-2">
+                                                <p className="text-sm font-semibold flex items-center gap-2">
+                                                    ❓ La question qu'il ne se pose jamais :
+                                                </p>
+                                                <button
+                                                    onClick={() => toggleQuestion(type.id)}
+                                                    className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-xs font-semibold transition-all"
+                                                >
+                                                    {revealedQuestions[type.id] ? 'Masquer' : 'Révéler'}
+                                                </button>
+                                            </div>
+                                            
+                                            {revealedQuestions[type.id] && (
+                                                <p className="text-lg font-bold italic mt-2 animate-fadeIn">
+                                                    "{type.question}"
+                                                </p>
+                                            )}
+                                        </div>
+
+                                        <div className="pt-4 border-t border-white/20">
+                                            <p className="text-sm opacity-75 mb-1">Conséquence :</p>
+                                            <p className="text-sm font-semibold">{type.consequence}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="bg-gradient-to-br from-slate-700 to-slate-800 p-8 rounded-xl border-2 border-dashed border-slate-600 relative overflow-hidden mb-16">
+                            <div className="absolute inset-0 bg-gradient-to-r from-purple-900/10 to-pink-900/10 animate-pulse"></div>
+                            <div className="relative">
+                                <div className="text-center mb-6">
+                                    <div className="text-6xl mb-4 opacity-50">❓</div>
+                                    <h3 className="text-3xl font-bold mb-2">Type 7 : ???</h3>
+                                </div>
+                                
+                                <div className="bg-black/30 p-6 rounded-lg max-w-2xl mx-auto">
+                                    <p className="text-gray-300 leading-relaxed mb-4">
+                                        Vous l'avez remarqué sur l'illustration : il y a un septième personnage.
+                                    </p>
+                                    <p className="text-gray-300 leading-relaxed mb-4">
+                                        Celui dont je ne parle pas encore.
+                                    </p>
+                                    <p className="text-xl font-bold text-purple-400 text-center mb-4">
+                                        Surveillez bien chacun des autres types au fur et à mesure où ils se dévoileront, 
+                                        vous pourriez le reconnaître peu à peu pour au final vous exclamer :
+                                    </p>
+                                    <p className="text-2xl font-bold text-center text-yellow-400">
+                                        "Mais bon sang ! C'est bien sûr !!!"
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-xl p-8 border border-blue-700/50 mt-16">
+                            <h3 className="text-3xl font-bold mb-6 text-center">
+                                Découvrez votre profil
+                            </h3>
+                            
+                            <p className="text-center text-gray-300 mb-8 max-w-2xl mx-auto text-xl">
+                                En votre âme et conscience, reconnaissez-vous cette personne ?
+                            </p>
+
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto mb-8">
+                                {types.map((type) => (
+                                    <div 
+                                        key={type.id}
+                                        className="p-4 rounded-lg border-2 bg-slate-800/50 border-slate-600 hover:border-blue-500 transition-all"
+                                    >
+                                        <div className="flex items-center justify-between mb-2">
+                                            <div>
+                                                <p className="font-bold text-lg">{type.title}</p>
+                                                <p className="text-sm text-gray-400 italic">{type.subtitle}</p>
+                                            </div>
+                                            <div className="text-3xl">{type.icon}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                                
+                                <div className="p-4 rounded-lg border-2 bg-slate-800/30 border-dashed border-slate-600">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div>
+                                            <p className="font-bold text-lg">Type 7</p>
+                                            <p className="text-sm text-gray-400 italic">???</p>
+                                        </div>
+                                        <div className="text-3xl opacity-50">❓</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="text-center">
+                                <p className="text-sm text-gray-400 mb-4">
+                                    💡 Abonnez-vous pour recevoir une notification à chaque nouvelle publication
+                                </p>
+                                
+                                    href="https://wp.me/P8XxLZ-WF"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                                >
+                                    S'abonner
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="mt-16 bg-gradient-to-r from-blue-900/40 to-purple-900/40 rounded-xl p-8 border border-blue-600">
+                            <div className="max-w-3xl mx-auto">
+                                <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                                    Face à un problème récurrent, nous adoptons souvent des comportements types — comme les 7 profils que nous allons passer au crible.
+                                </p>
+                                <p className="text-xl font-bold text-center mb-6 text-blue-400">
+                                    Faites entrer les témoins…
+                                </p>
+                                <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                                    En votre âme et conscience, reconnaissez-vous l'un d'eux ?
+                                </p>
+                                <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                                    Dans chaque prochain article, nous convoquerons un profil pour l'interroger sans pitié.
+                                </p>
+                                <div className="bg-black/30 p-6 rounded-lg mb-6">
+                                    <p className="text-xl font-bold text-center mb-3">
+                                        Le premier à comparaître sera le Profil 1 : L'Éternel Optimiste…
+                                    </p>
+                                    <p className="text-center text-gray-400 italic">
+                                        Et si vous vous reconnaissiez ?
+                                    </p>
+                                </div>
+                                <div className="text-center">
+                                    <a 
+                                        href="#" 
+                                        className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all transform hover:scale-105 shadow-lg"
+                                    >
+                                        À découvrir dans cet article
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-16 pt-8 border-t border-slate-700">
+                            <div className="grid md:grid-cols-3 gap-8 text-center">
+                                <div>
+                                    <div className="text-3xl mb-2">📚</div>
+                                    <h4 className="font-bold mb-2 text-xl text-white">7 articles pour visiter chacun des profils</h4>
+                                </div>
+                                <div>
+                                    <div className="text-3xl mb-2">💭</div>
+                                    <h4 className="font-bold mb-2">Méthode socratique</h4>
+                                    <p className="text-sm text-gray-400">Des questions qui révèlent sans jugement ni leçon</p>
+                                </div>
+                                <div>
+                                    <div className="text-3xl mb-2">🎯</div>
+                                    <h4 className="font-bold mb-2">Transformation réelle</h4>
+                                    <p className="text-sm text-gray-400">Une transformation réelle par des prises de conscience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<SeriesHomepage />);
+    </script>
+</body>
+</html>
